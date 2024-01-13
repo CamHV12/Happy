@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Marquee Example</title>
     <style>
         body {
             margin: 0;
@@ -17,51 +17,42 @@
         }
 
         marquee {
-            position: absolute;
-            top: 40%;
-            transform: translate(0%, 0%);
+            position: fixed;
+            top: 20%;
             color: #fff;
             font-family: "Source Sans Pro";
             font-size: 6em;
             font-weight: 900;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-
-        @keyframes blink {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
+            white-space: nowrap;
+            overflow: hidden;
+            animation: 2s linear infinite;
+            /* Chỉnh số 5s để thay đổi tốc độ (giây) */
         }
 
         .birthday-element {
+            position: fixed;
+            margin-left: 15%;
+            display: flex;
+            justify-content: center;
             font-size: 24px;
             text-align: center;
-            padding: 20px;
             color: #79a1c4;
-
-            animation: blink 2s infinite;
             /* 2s là thời gian của mỗi chu kỳ blink */
         }
     </style>
 </head>
 
 <body>
-    <div style="height: 0%;">
-        <h1 style="font-size: 70px;" class="birthday-element">
-            ❤❤❤ Sinh nhật tuổi 23 ❤❤❤
-        </h1>
-        <marquee direction=”left”>Gửi người con gái đang trước mà ảnh này, hôm nay là một dịp đặc biệt anh muốn dành vài lời ngọt ngào đến với em. Thật tình anh không giỏi văn nhưng anh cũng đã vận dụng 12 năm học của mình để bày tỏ với em. 
-            Chúc em trong công việc, gia đình đều thõa mãn và hạnh phúc và trong đó có cả anh. Mong rằng thêm tuổi mới sẽ có nhiều điều tốt đẹp sẽ đến với em. Và đặc biệt, em hãy luôn nở nụ cười trên môi nhé!!❤   </marquee>
-        <canvas id="birthday"></canvas>
+    <h1 class="birthday-element">❤Chúc mừng sinh nhật❤ <br> ❤Tuổi 23 của Em❤
+    </h1>
+    <canvas id="birthday"></canvas>
+    <marquee scrollamount="30" scrolldelay="0">
+        Gửi người yêu của anh, hôm nay là một ngày đặc biệt của em. 
+        Anh chỉ muốn nói rằng: Chúc mừng em thêm một tuổi mới, một năm mới với nhiều cơ hội, trải nghiệm mới. 
+        Và phía sau em luôn có anh sẵn lòng ủng hộ và đi cùng em trong mọi hành trình. 
+        Mong rằng những ước mơ của em sẽ trở thành hiện thực và mọi ngày đều tràn đầy hạnh phúc và thành công. 
+        Chúc em có một ngày sinh nhật thật ý nghĩa và tràn đầy niềm vui. 
+        Yêu em nhiều!!❤
     </div>
 
 
@@ -88,7 +79,7 @@
                 this.spawnA = center - center / 4 | 0
                 this.spawnB = center + center / 4 | 0
 
-                this.height = canvas.height = window.innerHeight
+                this.height = canvas.height = 740
                 this.spawnC = this.height * .1
                 this.spawnD = this.height * .5
 
@@ -124,7 +115,7 @@
                 if (this.counter >= 1) {
                     this.fireworks.push(new Firework(
                         random(this.spawnA, this.spawnB),
-                        this.height,
+                        10,
                         random(0, this.width),
                         random(this.spawnC, this.spawnD),
                         random(0, 360),
@@ -190,13 +181,13 @@
                         let point = this.history[i]
                         ctx.beginPath()
                         ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)'
-                        ctx.arc(point.x, point.y, 1, 0, PI2, false)
+                        ctx.arc(point.x, point.y, 2, 0, PI2, false)
                         ctx.fill()
                     }
                 } else {
                     ctx.beginPath()
                     ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)'
-                    ctx.arc(this.x, this.y, 1, 0, PI2, false)
+                    ctx.arc(this.x, this.y, 2, 0, PI2, false)
                     ctx.fill()
                 }
 
@@ -220,7 +211,7 @@
                 let delta = now - then
 
                 then = now
-                birthday.update(delta / 1000)
+                birthday.update(delta / 300)
 
 
             })()
